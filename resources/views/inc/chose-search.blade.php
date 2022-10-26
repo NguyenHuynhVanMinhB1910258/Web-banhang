@@ -4,7 +4,7 @@
     </a>
 <div class="list-group" style=" max-height: 250px; overflow:auto;">
     @foreach ($firms as $firm)
-        <a href="/{{$firm->name}}" class="list-group-item list-group-item-action">{{$firm->name}}</a>
+        <a href="/firm-{{$firm->name}}" class="list-group-item list-group-item-action">{{$firm->name}}</a>
     @endforeach
     
 </div>

@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Files;
 class ProductController extends Controller
 {
+    public function detail($id){
+        $products = products::where(['id'=>$id])->get();
+        $images = images::where(['id_product'=> $id])->get();
+        return view('detail-product',compact('products','images'));
+    }
     public function delete_product($id)
     {
         $products = products::where(['id'=>$id])->get();

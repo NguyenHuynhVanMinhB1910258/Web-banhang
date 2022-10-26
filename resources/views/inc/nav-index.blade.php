@@ -57,7 +57,7 @@
                             </div>
                         </div>
                     </form>
-                    <a href="/">Hompage</a>
+                    <a href="/" style="text-decoration: none;">Hompage</a>
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 

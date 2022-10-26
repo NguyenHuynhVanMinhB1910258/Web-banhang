@@ -56,8 +56,10 @@
                             <img class="card-img-top" src="backend/img/{{$product->poster}}">
                             <div class="card-body">
                               <h6 class="card-title">{{$product->name}}</h6>
-                              <p class="card-text">${{$product->price}}</p>
-                              <a href="#" class="btn btn-primary">Add to cart</a>
+                              <p style="color: red;" class="card-text"><b>${{$product->price}}</b> </p>
+                              @if (session('user'))
+                              <a href="#" class="btn btn-primary"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart</a>
+                              @endif
                             </div>
                           </div>
                         @endforeach

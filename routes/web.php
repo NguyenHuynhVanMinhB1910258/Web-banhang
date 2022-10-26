@@ -20,7 +20,7 @@ use App\Models\products;
 |
 */
   
- Route::prefix('admin')->middleware('isAdmin')->group(function(){
+Route::prefix('admin')->middleware('isAdmin')->group(function(){
     Route::get('/', function () {
          return view('admin');
     });
@@ -33,7 +33,9 @@ use App\Models\products;
     Route::post('/firms-show/add',[FirmController::class,'firm_add']);
     Route::post('/firms-show/edit',[FirmController::class,'firm_edit']);
 });
+Route::prefix('/')->middleware('Auth')->group(function(){
 
+});
 Route::get('/', function () {
     $firms=firm::all();
     return view('index',compact('firms'));
@@ -44,7 +46,7 @@ Route::get('/{price1}&{price2}', function ($price1,$price2) {
     $products=products::whereBetween('price',[$price1,$price2])->get();
     return view('search-product-price',compact('firms','products','name'));
 });
-Route::get('/{name}', function ($name) {
+Route::get('/firm-{name}', function ($name) {
     $firms=firm::all();
     $products=firm::where(['name'=>$name])->get();
     return view('search-product',compact('firms','products','name'));
@@ -60,6 +62,7 @@ Route::get('/register', function () {
 Route::get('/forgot-password', function () {
     return view('forgot-password');
 });
+Route::get('/detail-{id}',[ProductController::class,'detail']);
 Route::post('/login/user',[UserController::class, 'validate_login']);
 Route::post('/registration/user',[UserController::class, 'validate_registration']);
 Route::get('/logout',[UserController::class, 'logout']);
