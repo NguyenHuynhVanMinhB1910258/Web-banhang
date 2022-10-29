@@ -14,11 +14,14 @@ return new class extends Migration
     public function up()
     {
         //
-        Schema::table('products', function (Blueprint $table) {
-            $table->integer('id_firm')->unsigned();
-            $table->foreign('id_firm')->references('id')->on('firms');
+        Schema::table('detail_orders', function (Blueprint $table) {
+            // $table->integer('id_product')->unsigned(); 
+            // $table->integer('id_order')->unsigned();
+            $table->foreign('id_product')->references('id')->on('products');
+            $table->foreign('id_order')->references('id')->on('orders');
         });
     }
+
     /**
      * Reverse the migrations.
      *

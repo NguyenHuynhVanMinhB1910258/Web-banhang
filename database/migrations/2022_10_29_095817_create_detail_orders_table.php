@@ -13,12 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        //
-        Schema::table('products', function (Blueprint $table) {
-            $table->integer('id_firm')->unsigned();
-            $table->foreign('id_firm')->references('id')->on('firms');
+        Schema::create('detail_orders', function (Blueprint $table) {
+            $table->integer('id_product')->unsigned();
+            $table->integer('id_order')->unsigned();
+            $table->decimal('price',8,2);
+            $table->timestamps();
         });
     }
+
     /**
      * Reverse the migrations.
      *
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('detail_orders');
     }
 };

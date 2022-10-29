@@ -10,10 +10,32 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Files;
 class ProductController extends Controller
 {
+    public function search($name){
+        $products = products::where('name','Like','%'.$name.'%')->get();
+        // mysqli_query($conn,"SELECT * From truyen where ten like '%$q%' ");
+        $output = "";
+
+        // lookup all hints from array if $q is different from ""
+        if ($name !== "") {
+        foreach($products as $product) {
+            if ($output=== "") {
+                $output = "<li class='list-group-item'><a href='detail-$product->id' style='text-decoration: none; color: black;'><div class='row'><img class='col-4' src='backend/img/$product->poster' height='90px' width='90px'><p class='col-8' style='font-size: 12px' >$product->name</p></div></a></li>";
+            } else {
+                $output .= "<li class='list-group-item'><a href='detail-$product->id' style='text-decoration: none; color: black;'><div class='row'><img class='col-4' src='backend/img/$product->poster' height='90px' width='90px'><p class='col-8' style='font-size: 12px' >$product->name</p></div></a></li>";
+            }            
+        } 
+    }
+       if($output===""){
+        $output = "<li class='list-group-item'>Không tìm thấy kết quả</li>";
+       }
+    return response($output);
+        // Output "no suggestion" if no hint was found or output correct values       
+    }
     public function detail($id){
         $products = products::where(['id'=>$id])->get();
         $images = images::where(['id_product'=> $id])->get();
         return view('detail-product',compact('products','images'));
+        // return view('detail-product');
     }
     public function delete_product($id)
     {

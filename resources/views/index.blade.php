@@ -50,18 +50,29 @@
                         <h2 style="margin-top: 30px">{{$firm->name}}
                         </h2>
                         <div class="row">
+                        @php $i=1; @endphp
                         @foreach ($firm->products as $product)
-                        
-                            <div class="card" style="width: 23%; margin-right: 1%;  margin-left: 1%;">
-                            <img class="card-img-top" src="backend/img/{{$product->poster}}">
-                            <div class="card-body">
-                              <h6 class="card-title">{{$product->name}}</h6>
-                              <p style="color: red;" class="card-text"><b>${{$product->price}}</b> </p>
-                              @if (session('user'))
-                              <a href="#" class="btn btn-primary"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart</a>
-                              @endif
-                            </div>
-                          </div>
+                        @php $i++; @endphp
+                             
+                                <div class="card" style="width: 23%; margin:1% 1%;">
+                                  <a href="detail-{{$product->id}}" style="color: black;
+                                    text-decoration: none;">
+                                    <img class="card-img-top" src="backend/img/{{$product->poster}}">
+                                  <div class="card-body">
+                                   
+                                    <h6 class="card-title">{{$product->name}}</h6>
+                                    <p style="color: red;" class="card-text"><b>${{$product->price}}</b> </p>
+                                    </a>
+                                   
+                                    <a  class="btn btn-primary" onclick="addCart({{$product->id}})" ><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart</a>
+                                 
+                                  </div>
+                                </div>                 
+                            
+                        @if ($i == 5)
+                          @php $i=1; @endphp
+                          @break 
+                        @endif 
                         @endforeach
                         </div>
                         @endforeach 

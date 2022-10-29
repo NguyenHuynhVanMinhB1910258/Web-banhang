@@ -2,17 +2,19 @@
 
 namespace App\Http\Middleware;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Closure;
+use Illuminate\Http\Request;
 
-class Authenticate extends Middleware
+class ClientMiddleware
 {
     /**
-     * Get the path the user should be redirected to when they are not authenticated.
+     * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return string|null
+     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
+     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    protected function redirectTo($request)
+    public function handle(Request $request, Closure $next)
     {
         if(Auth::check()){
             if(Auth::user()->role=='0'){
@@ -23,5 +25,6 @@ class Authenticate extends Middleware
         }else{
             return  redirect('/login');
         }
+        // return $next($request);
     }
 }

@@ -6,29 +6,32 @@
                         <!-- Page Heading -->                         
                         <h2 style="margin-top: 30px">{{$name}}
                         </h2>
-                        <div class="row">
+                        <div class="row" style="text-align: center">
                         @foreach ($products as $product)
                         {{-- {{$products->product}}                           --}}
                         @endforeach 
-                        @foreach ($product->products as $pro)
-                            <div class="card" style="width: 23%; margin-right: 1%;  margin-left: 1%;">
+                        @forelse ($product->products as $pro)
+                            <div class="card" style="width: 23%; margin:1% 1%;">
+                                <a href="detail-{{$product->id}}" style="color: black; text-decoration: none;">
                             <img class="card-img-top" src="backend/img/{{$pro->poster}}">
                             <div class="card-body">
                               <h6 class="card-title">{{$pro->name}}</h6>
-                              <p style="color: red;" class="card-text"><b>${{$pro->price}}</b> </p>
-                              @if (session('user'))
+                              <p style="color: red;" class="card-text"><b>${{$pro->price}}</b> </p></a>
+                             
                               <a href="#" class="btn btn-primary"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart</a>
-                              @endif
+                            
                             </div>
-                          </div>
-                        @endforeach
+                            </div>
+                         
                         
-                        </div>
-                      
-                        
-                          
+                          @empty
+                          <h2 style="margin: 10% 35%">Không có sản phẩm tồn tại</h2> 
+                       
+                        @endforelse 
+                    </div>
+                
                 <!-- /.container-fluid -->
-                </div>           
+                </div>
                 <!-- Begin Page Content -->
                 
             <!-- End of Main Content -->

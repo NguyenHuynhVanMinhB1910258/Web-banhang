@@ -9,10 +9,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>M Store</title>
 
     <!-- Custom fonts for this template-->
-<link href="{{('frontend/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    <script src="{{('frontend/js/main.js')}}"></script>
+    <link href="{{('frontend/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -21,7 +22,6 @@
     <link href="{{('frontend/css/sb-admin-2.min.css')}}" rel="stylesheet">
 
 </head>
-
 <body id="page-top" >
 
     <!-- Page Wrapper -->
@@ -48,15 +48,20 @@
                     <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                            <input type="search" id="search" onkeyup="showHint(this.value)" class="form-control bg-light border-0 small" placeholder="Search for..."
                                 aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
+                                <button class="btn btn-primary">
                                     <i class="fas fa-search fa-sm"></i>
                                 </button>
                             </div>
                         </div>
                     </form>
+                    <div style="position: fixed; top: 70px; width: 400px; max-height: 400px; overflow: auto;">
+                        <ul class="list-group" id="item" >
+                      </ul>
+                    </div>
+                    
                     <a href="/" style="text-decoration: none;">Hompage</a>
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
