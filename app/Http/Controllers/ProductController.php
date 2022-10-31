@@ -12,10 +12,7 @@ class ProductController extends Controller
 {
     public function search($name){
         $products = products::where('name','Like','%'.$name.'%')->get();
-        // mysqli_query($conn,"SELECT * From truyen where ten like '%$q%' ");
         $output = "";
-
-        // lookup all hints from array if $q is different from ""
         if ($name !== "") {
         foreach($products as $product) {
             if ($output=== "") {

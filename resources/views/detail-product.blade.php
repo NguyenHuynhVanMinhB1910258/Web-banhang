@@ -73,8 +73,10 @@
                                     @endforeach
                                     
                                 </div>
+                        <div style="margin-top: 50px">
                             <button class="btn btn-primary" >Mua ngay</button>
                             <button class="btn btn-outline-primary" >Thêm vào giỏ hàng</button>
+                        </div>
                         </div>
                         </div>
                         

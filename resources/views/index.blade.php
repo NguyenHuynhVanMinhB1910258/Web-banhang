@@ -1,6 +1,6 @@
 @include('inc.nav-index')
                 <!-- End of Topbar -->
-                <div style="margin-top: 100px">
+                <div style="margin-top: 100px" onclick="closeCart()">
                     @include('inc.chose-search')
                     <div class="container" id="df">
                        
@@ -137,13 +137,12 @@
             
             <!-- Custom scripts for all pages-->
             <script src="{{('frontend/js/sb-admin-2.min.js')}}"></script>
-            
             <!-- Page level plugins -->
            {{-- <script src="{{('frontend/vendor/chart.js/Chart.min.js')}}"></script> --}}
             
             <!-- Page level custom scripts -->
             {{-- <script src="{{('frontend/js/demo/chart-area-demo.js')}}"></script> --}}
-
+            
             </body>
             
     </html>

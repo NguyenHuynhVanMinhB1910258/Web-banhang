@@ -7,6 +7,7 @@ use Hash;
 use Session;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Orders;
 use Illuminate\Support\Facades\DB;
 session_start();
 
@@ -44,14 +45,37 @@ class UserController extends Controller
        $credentials=$request->only('email','password');
        if(Auth::attempt(['email' => $data['email'], 'password' => $data['password'], 'role' => 0])){
          $users = DB::table('users')->where('email', $data['email'])->first();
-         Session::put('user',$users->name);
-         return redirect('/');
+         $items = Orders::where(['id_user'=>$users->id,
+        'Status'=>'-1'])->withCount('items')->get();
+        Session::put('user_id',$users->id);
+        Session::put('user',$users->name);
+         
+        if($items->toArray()==null){
+            Session::put('cart','0');
+        }else{
+            foreach($items as $item){}
+            Session::put('cart',$item->items_count);
+        }
+       
+        
+        return redirect('/');
+            
         // return route('admin');
         //  dd($users->name);
        }
        if(Auth::attempt(['email' => $data['email'], 'password' => $data['password'], 'role' => 1])){
         $users = DB::table('users')->where('email', $data['email'])->first();
+        $items = Orders::where(['id_user'=>$users->id,
+        'Status'=>'-1'])->withCount('items')->get();
+        
         Session::put('user',$users->name);
+        Session::put('user_id',$users->id);
+        if($items->toArray()==null){
+            Session::put('cart','0');
+        }else{
+            foreach($items as $item){}
+            Session::put('cart',$item->items_count);
+        }
         return redirect('/admin');
        // return route('admin');
        //  dd($users->name);
@@ -64,6 +88,8 @@ class UserController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         Session::put('user',null);
+        Session::put('cart',null);
+        Session::put('user_id',null);
         return redirect('/');
     }
 

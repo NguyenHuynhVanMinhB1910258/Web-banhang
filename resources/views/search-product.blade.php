@@ -18,7 +18,7 @@
                               <h6 class="card-title">{{$pro->name}}</h6>
                               <p style="color: red;" class="card-text"><b>${{$pro->price}}</b> </p></a>
                              
-                              <a href="#" class="btn btn-primary"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart</a>
+                              <a class="btn btn-primary" onclick="addCart({{$pro->id}})"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart</a>
                             
                             </div>
                             </div>

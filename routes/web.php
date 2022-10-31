@@ -35,9 +35,11 @@ Route::prefix('admin')->middleware('isAdmin')->group(function(){
     Route::post('/firms-show/edit',[FirmController::class,'firm_edit']);
 });
 Route::prefix('/')->middleware('Client')->group(function(){
-  
+    Route::get('showcart',[CartController::class,'showcart']);
+    Route::get('removecart/r={id}',[CartController::class,'removecart']);
 }); 
 Route::get('addcart/c={id}',[CartController::class,'add']);
+
 Route::get('/', function () {
     $firms=firm::all();
     return view('index',compact('firms'));
