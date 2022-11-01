@@ -36,7 +36,7 @@
                         x.style="border-color: #97969181; ";
                     }
                 </script>
-                <div style="margin-top: 100px">
+                <div style="margin-top: 100px" onmouseover="closeCart()">
                     <div class="container" id="df">
                          @foreach ($products as $product)
                          <h5 class="row"> <a href="/" style="color: gray" >Homepage </a> <p> \ </p><a style="color: gray" href="/firm-{{$product->firm['name']}}">{{$product->firm['name']}}</a></h5>
@@ -75,7 +75,7 @@
                                 </div>
                         <div style="margin-top: 50px">
                             <button class="btn btn-primary" >Mua ngay</button>
-                            <button class="btn btn-outline-primary" >Thêm vào giỏ hàng</button>
+                            <button class="btn btn-outline-primary" onclick="addCart({{$product->id}})" >Thêm vào giỏ hàng</button>
                         </div>
                         </div>
                         </div>

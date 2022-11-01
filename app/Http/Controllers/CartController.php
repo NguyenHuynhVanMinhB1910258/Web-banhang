@@ -15,7 +15,7 @@ class CartController extends Controller
                                 'Status'=>'-1'])->withCount('items')->get();
         foreach( $orders as $order){}      
         Session::put('cart',$order->items_count);
-        return response($order->items_count);
+        return response()->json($order->toArray());
     }
     public function add($id){
         $orders=Orders::where(['id_user'=>session('user_id'),
@@ -36,7 +36,11 @@ class CartController extends Controller
         }
         foreach($item_quantity as  $quantity){}
         Session::put('cart',$quantity->items_count);
-        return response()->json($quantity->items_count);
+        return response()->json($quantity->toArray());
+    }
+    public function detail_order($id){
+        $products=Detail_Orders::where(['id_order'=>$id])->get();
+        return view('detail_cart',compact('products'));
     }
     public function showcart(){
         $orders=Orders::where(['id_user'=>session('user_id'),
@@ -48,6 +52,7 @@ class CartController extends Controller
         $total = 0;
         foreach($products as $product){
             $id=$product->id;
+            $id_order=$product->id_order;
             $id_product=$product->products['id'];
             $poster = $product->products['poster'];
             $name = $product->products['name'];
@@ -70,7 +75,7 @@ class CartController extends Controller
                                                 </a>   
                                             </div>
                                         
-                                            <a class='col-2' onclick='removeitem($id)'><i class=' fa fa-times' aria-hidden='true' ></i></a>
+                                            <a class='col-2' onclick='removeitem($id ,this)'><i class='fa fa-times' aria-hidden='true' ></i></a>
                                         </div>
                                         
                         </div>";
@@ -87,16 +92,13 @@ class CartController extends Controller
                                         <div class='small text-gray-500'>$price</div>
                                         </a>     
                                     </div>
-                                    <a class='col-2' onclick='removeitem($id)'><i class=' fa fa-times' aria-hidden='true' ></i></a>
+                                    <a class='col-2' onclick='removeitem($id ,this)'><i class=' fa fa-times' aria-hidden='true' ></i></a>
                                 </div>
                             </div>";
                 } 
             $i++;
-            }
-           
+            }           
         }
-        
-
             if($output==""){
                 $output = "<div class='dropdown-item d-flex align-items-center'>
                                     <div class='col-12' style='height: 300px' >
@@ -107,18 +109,26 @@ class CartController extends Controller
                             </div>";
             }else{
                 $output .= "<div class='dropdown-item align-items-center'>
-                    <div class='row font-weight-bold'>
-                        
+                    <div class='row font-weight-bold'>                     
                             <div class='col-8'>Total:</div>
-                            <div class='col-4'>$$total</div>    
-                        
+                            <div class='col-4'>$$total</div>        
                     </div>
                 </div>
-                <a class='dropdown-item text-center small text-gray-1000' href='#'>view cart details</a>
+                <a class='dropdown-item text-center small text-gray-1000' href='/views_detail_cart=$id_order'>view cart details</a>
                 <a class='dropdown-item text-center text-white' href='#' style='background-color: #4e73df;'>buy now</a>
                 ";
             }
             return response($output);
         // return dd($product->products['poster']);
+    }
+    public function getorder(){
+        $orders=Orders::where(['id_user'=>session('user_id'),
+                                'Status'=>'-1'])->get();
+        foreach($orders as $order){}
+        $products=Detail_Orders::where(['id_order'=>$order->id])->get();
+        foreach($products as $product){
+            $product->products;
+        }
+        return response()->json($products);
     }
 }

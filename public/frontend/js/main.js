@@ -15,10 +15,14 @@ function showHint(str) {
     }
     }
 function addCart(id) {
+        
         var xmlhttp = new XMLHttpRequest();
+       
         xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("quantity").innerHTML = this.responseText;
+        if (this.readyState == 4 && this.status == 200) { 
+            const text = this.responseText;
+            const obj= JSON.parse(text);
+            document.getElementById("quantity").innerHTML = obj.items_count;
         }
         }
         xmlhttp.open("GET", "addcart/c="+id, true);
@@ -30,10 +34,9 @@ function closeCart() {
 function showCart() {
     // document.getElementById("index-cart").style = "display: block;";
     // document.getElementById("index-cart").onclick(document.getElementById("index-cart").style="display: none;");
- 
-    
-    var xmlhttp = new XMLHttpRequest();
     document.getElementById('dropdown-menu').style = 'display: block;';
+     var xmlhttp = new XMLHttpRequest();
+   
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
         document.getElementById("list-cart").innerHTML = this.responseText;
@@ -42,11 +45,29 @@ function showCart() {
     xmlhttp.open("GET", "showcart", true);
     xmlhttp.send();
 }
-function removeitem(id) {
-    var xmlhttp = new XMLHttpRequest();
+function showCart() {
+    // document.getElementById("index-cart").style = "display: block;";
+    // document.getElementById("index-cart").onclick(document.getElementById("index-cart").style="display: none;");
+    document.getElementById('dropdown-menu').style = 'display: block;';
+     var xmlhttp = new XMLHttpRequest();
+   
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-        document.getElementById("quantity").innerHTML = this.responseText;
+        document.getElementById("list-cart").innerHTML = this.responseText;
+    }
+    }
+    xmlhttp.open("GET", "showcart", true);
+    xmlhttp.send();
+}
+function removeitem(id,x) {   
+    x.innerHTML = "<div class='spinner-border' style='width: 1rem; height: 1rem;'></div>";
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        
+    if (this.readyState == 4 && this.status == 200) {
+            const text = this.responseText;
+            const obj = JSON.parse(text);
+        document.getElementById("quantity").innerHTML = obj.items_count;
     }
     }
     xmlhttp.open("GET", "removecart/r="+id, true);

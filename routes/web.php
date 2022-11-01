@@ -37,6 +37,8 @@ Route::prefix('admin')->middleware('isAdmin')->group(function(){
 Route::prefix('/')->middleware('Client')->group(function(){
     Route::get('showcart',[CartController::class,'showcart']);
     Route::get('removecart/r={id}',[CartController::class,'removecart']);
+    Route::get('views_detail_cart={id}',[CartController::class,'detail_order']);
+    Route::get('getorder',[CartController::class,'getorder']);
 }); 
 Route::get('addcart/c={id}',[CartController::class,'add']);
 

@@ -92,9 +92,8 @@
                         @if (session('user'))
 
                         <!-- Nav Item - Messages -->
-                        <li class="nav-item dropdown no-arrow mx-1" onmouseover="showCart()" >
-                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                        <li class="nav-item dropdown no-arrow mx-1" onclick="showCart()" >
+                            <a class="nav-link" id="messagesDropdown" role="button" >
                                 <i class="fas fa-shopping-cart"></i>
                                 <!-- Counter - Messages -->
                                 <span class="badge badge-danger badge-counter" id="quantity" >{{session('cart')}}</span>
@@ -107,14 +106,14 @@
                                 </h6>
                                 <div id='list-cart'>
                                     <div class='dropdown-item d-flex align-items-center'>
-                                        <div class='col-12' style='height: 300px'>
-                                            <div class="spinner-border" style="margin: 40%" ></div>
+                                        <div class='col-12' style='height: 300px' id='loading'>
+                                            <div class='spinner-border' style='margin: 40%;' ></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </li>
-
+                        
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->

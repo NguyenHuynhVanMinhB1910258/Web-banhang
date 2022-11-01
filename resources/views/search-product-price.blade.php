@@ -1,6 +1,6 @@
 @include('inc.nav-index')
                 <!-- End of Topbar -->
-            <div style="margin-top: 100px">
+            <div style="margin-top: 100px" onmouseover="closeCart()">
                     @include('inc.chose-search')
                     <div class="container" id="df">
                         <!-- Page Heading -->                         
